@@ -1,0 +1,68 @@
+{%extends 'base.html' %}
+{% block title %}detail{% endblock %}
+{% block content %}
+    <h3 class="text-center">Detail posts</h3>
+   
+<div class="container m-4">
+
+       <div class="card" style="width: 80%;height: 80%">
+  <img src="{{blogs.image.url}}" class="card-img-top" alt="{{blogs.title}}"/>
+  <div class="card-body">
+    <p class="card-text">
+        <h5 class="card-title">{{blogs.title}}</h5>
+        <p class="card-text">{{blogs.content}}</p>
+        <p class="card-text">Author: {{blogs.author.username}}</p>
+        <p class="card-text">Created at: {{blogs.created_at}}</p>
+        <p class="card-text">Updated at: {{blogs.updated_at}}</p>
+        <p class="card-text">Category: {{blogs.category.name}}</p>
+        {% if user.is_authenticated %}
+        <div class="d-flex align-items-center">
+
+    <form method="post" action="{% url 'toggle_like' blogs.pk %}">
+        {% csrf_token %}
+        {% if user in blogs.likes.all %}
+            <button type="submit" class="btn btn-danger m-3">❤️ No me gusta({{ blogs.likes.count }})</button>
+        {% else %}
+            <button type="submit" class="btn btn-primary m-3">🤍 Me gusta ({{ blogs.likes.count }})</button>
+        {% endif %}
+    </form>
+{% else %}
+    <a href="{% url 'login' %}" class="btn btn-outline-secondary">Inicia sesión para dar like</a>
+{% endif %}
+
+        <a href="{% url 'home' %}" class="btn btn-success">Back home</a>
+      </div>
+      <hr>
+
+      <h3>Comentarios</h3>
+
+{% if blogs.comments.all|length == 0 %}
+  <p>No hay comentarios aún.</p>
+{% else %}
+  {% for comment in blogs.comments.all %}
+    <div class="mb-3 border-bottom pb-2">
+      <strong>{{ comment.author }}</strong> <small class="text-muted">{{ comment.created_at|date:"Y-m-d H:i" }}</small>
+      <p class="mb-0">{{ comment.content }}</p>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<hr>
+
+<h4>Dejá un comentario</h4>
+
+{% if user.is_authenticated %}
+  <form method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit" class="btn btn-primary btn-sm">Publicar comentario</button>
+  </form>
+{% else %}
+  <p><a href="{% url 'login' %}?next={{ request.path }}">Iniciá sesión</a> para comentar.</p>
+{% endif %}
+
+    </p>
+  </div>
+</div>
+</div>
+       {%endblock%}

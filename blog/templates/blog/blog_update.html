@@ -1,0 +1,19 @@
+{%extends 'base.html' %}
+{% load static %}
+{% block title %}update{% endblock %}
+{% block content %}
+ <h3 class="text-center">Update Blog</h3>
+<div class="container">
+  
+<div class="container mt-4">
+    <h2>Editar Blog</h2>
+    <form method="POST" enctype="multipart/form-data" class="mt-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Guardar cambios</button>
+        <a href="{% url 'blog_detail' form.instance.id %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+</div>
+   {%endblock%}

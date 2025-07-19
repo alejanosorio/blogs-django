@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Blog{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>¿Estás seguro que querés eliminar este blog?</h2>
+    <p><strong>{{ object.title }}</strong></p>
+    <form method="POST">
+        {% csrf_token %}
+        <a href="{% url 'blog_detail' object.pk %}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    </form>
+</div>
+{% endblock %}

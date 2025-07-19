@@ -1,0 +1,31 @@
+{%extends 'base.html' %}
+{% block title %}create{% endblock %}
+{% block content %}
+<h2 class="text-center">Crear un blogspost</h2>
+<div class="container">
+<form  method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+   <label for="id_category">Categoría:</label>
+    {{ form.category }}
+
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <div class="d-grid">
+    <button type="submit" class="btn  btn-success mb-4" >Create new blog</button>
+    </div>
+    
+
+</form>
+</div>
+{%endblock%}

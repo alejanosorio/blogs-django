@@ -1,0 +1,106 @@
+
+{%extends 'base.html' %}
+{% load static %}
+{% block title %}home{% endblock %}
+{% block content %}
+    <h3 class="text-center text-light mt-4">Oh my Blogs!!!</h3>
+   
+
+<div class="container">
+   
+        {% for blog in blogs %}
+           <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="card-title">{{ blog.title }}</h4>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                    <div class="col">
+                        {% if blog.image %}
+                        <img src="{{ blog.image.url }}" class="img-fluid rounded-start" alt="{{ blog.title }}">
+                        {% else %}
+    <img src="{% static 'images/python3.png' %}" class="img-fluid rounded-start" alt="Sin imagen">
+{% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            
+                            <p class="card-text">{{ blog.content|truncatewords:30 }}</p>
+                            <span class="badge bg-warning">{{ blog.category.name }}</span>
+                            <span class="badge bg-info">{{ blog.author.username }}</span>
+                            <span class="badge bg-dark">{{ blog.views }} views</span>
+                            <span class="badge bg-danger text-light">{{ blog.likes.count }} likes</span>
+                            <span class="badge bg-primary">{{ blog.comments.count }} comments</span>
+                        </div>
+                            <div class="mt-4">
+                                <a href="{% url 'blog_detail' blog.id %}" class="btn btn-primary btn-sm">Read More</a>
+                                <a href="{% url 'blog_update' blog.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                                <a href="{% url 'blog_create' %}" class="btn btn-success btn-sm">Create New Blog</a>
+    
+                               {% if user.is_authenticated and user == blog.author %}
+
+    <!-- Botón que abre el modal -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ blog.id }}">
+        Delete
+    </button>
+
+    <!-- Modal de confirmación de borrado -->
+    <div class="modal fade" id="confirmDeleteModal{{ blog.id }}" tabindex="-1" aria-labelledby="modalLabel{{ blog.id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{% url 'blog_delete' blog.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel{{ blog.id }}">¿Eliminar blog?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que querés eliminar el blog <strong>{{ blog.title }}</strong>?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+        {% if is_paginated %}
+            <nav aria-label="Page navigation">
+                <ul class="pagination                                                   ">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        </li>
+                    {% endif %}
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>   
+            </nav>  
+        {% endif %}
+
+
+    </div>
+
+     
+
+{% endblock %}

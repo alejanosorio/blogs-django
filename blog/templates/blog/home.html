@@ -31,15 +31,15 @@
                             <span class="badge bg-primary">{{ blog.comments.count }} comments</span>
                         </div>
                             <div class="mt-4">
-                                <a href="{% url 'blog_detail' blog.id %}" class="btn btn-primary btn-sm">Read More</a>
-                                <a href="{% url 'blog_update' blog.id %}" class="btn btn-secondary btn-sm">Edit</a>
-                                <a href="{% url 'blog_create' %}" class="btn btn-success btn-sm">Create New Blog</a>
+                                <a href="{% url 'blog_detail' blog.id %}" class="btn btn-primary btn-sm">Leer mas..</a>
+                                <a href="{% url 'blog_update' blog.id %}" class="btn btn-secondary btn-sm">Editar</a>
+                                <a href="{% url 'blog_create' %}" class="btn btn-success btn-sm">Crear nuevo Blog</a>
     
                                {% if user.is_authenticated and user == blog.author %}
 
     <!-- Botón que abre el modal -->
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ blog.id }}">
-        Delete
+        Eliminar
     </button>
 
     <!-- Modal de confirmación de borrado -->

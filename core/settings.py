@@ -15,7 +15,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 DEBUG = env('DEBUG',default=False)
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['proyecto-informatorio.onrender.com'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['alejo2025.pythonanywhere.com'])
 
 
 # Application definition

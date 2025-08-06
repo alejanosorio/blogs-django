@@ -97,12 +97,10 @@ USE_I18N = True
 USE_TZ = True
 
 #url de los archivos estáticos
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 #directorio donde se van a almacenar los archivos estáticos
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # Donde vas a tener tus CSS, JS, imágenes, etc.
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,('media'))

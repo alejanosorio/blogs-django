@@ -7,6 +7,7 @@ urlpatterns = [
     path('create/', BlogCreate.as_view(), name='blog_create'),
     path('update/<int:pk>/', BlogUpdate.as_view(), name='blog_update'),
     path('delete/<int:pk>/', BlogDelete.as_view(), name='blog_delete'), 
-     path('like/<int:pk>/', ToggleLikeView.as_view(), name='toggle_like'),
+    path('like/<int:pk>/', ToggleLikeView.as_view(), name='toggle_like'),
+    path('buscar/', views.blog_search, name='blog_search'),
    
 ]

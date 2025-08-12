@@ -75,7 +75,9 @@ class ToggleLikeView(LoginRequiredMixin, View):
             post.likes.add(user)
 
         return redirect('blog_detail', pk=pk)
-
-         
+def blog_search(request):
+       query = request.GET.get('q', '')  #
+       results = BlogPost.objects.filter(title__icontains=query) if query else []
+       return render(request, 'blog/search.html', {'results': results, 'query': query})
 
     

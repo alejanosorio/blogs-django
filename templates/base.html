@@ -33,6 +33,11 @@
       </div>
     </div>
   </div>
+     <form class="d-flex p-3" method="GET" action="{% url 'home' %}">
+        <input class="form-control me-2" type="search" name="q" placeholder="Buscar título..." value="{{ request.GET.q }}">
+
+        <button class="btn btn-outline-dark" type="submit">Buscar</button>
+      </form>
      <div  class="d-flex m-2 p-2" >
 
     <a class="nav-link" href="https://facebook.com" target="_blank"><img src="{% static 'images/fb_claro.svg' %}" alt="Logo" width="38px"></a>&nbsp;&nbsp;

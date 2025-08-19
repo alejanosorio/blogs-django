@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Acerca de{% endblock %}
+
+{% block content %}
+<div class="container py-5" >
+    <h2 class="mb-2 text-center">Acerca de este Blog</h2>
+    <div class="row justify-content-center" >
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 rounded-3" >
+                <div class="card-body p-4" style="box-shadow: 10px 5px 10px black;background:#D3D3D3;">
+                    <p class="lead">
+                        Bienvenido a <strong>oh Mi Blogs!!</strong>, un espacio creado para compartir conocimientos, noticias y artículos sobre diversos temas.
+
+                    Este blog fue hecho para el proyecto informatorio,basado en el lenguaje Python y con los frameworks Django y Bootstrap</p>
+                    <h5 class="mt-4">Nuestro equipo</h5>
+                    <p>
+                        Detrás de este blog hay un equipo apasionado por la escritura y la tecnología, comprometido con mantener el sitio siempre actualizado y relevante.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+  <p class="text-center "><a href="{% url 'contact' %}" class="btn btn-outline-success ">Contacto</a></p>
+{% endblock %}

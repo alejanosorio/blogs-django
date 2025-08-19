@@ -3,13 +3,13 @@
 {% load static %}
 {% block title %}home{% endblock %}
 {% block content %}
-    <h3 class="text-center text-light mt-4">Oh my Blogs!!!</h3>
-   
+    <h2 class="text-center text-dark mt-4">Oh my Blogs!!!</h2>
 
-<div class="container">
-   
+
+<div class="container" >
+
         {% for blog in blogs %}
-           <div class="card mb-4">
+           <div class="card mb-4" style="background:#D3D3D3">
             <div class="card-header">
                 <h4 class="card-title">{{ blog.title }}</h4>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
@@ -22,20 +22,20 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            
-                            <p class="card-text">{{ blog.content|truncatewords:30 }}</p>
-                            <span class="badge bg-warning">{{ blog.category.name }}</span>
-                            <span class="badge bg-info">{{ blog.author.username }}</span>
-                            <span class="badge bg-dark">{{ blog.views }} views</span>
-                            <span class="badge bg-danger text-light">{{ blog.likes.count }} likes</span>
-                            <span class="badge bg-primary">{{ blog.comments.count }} comments</span>
+
+                            <p class="card-text">{{ blog.content|truncatewords:40 }}</p>
+                            <span class="badge  rounded-pill bg-warning">{{ blog.category.name }}</span>
+                            <span class="badge rounded-pill  bg-info">{{ blog.author.username }}</span>
+                            <span class="badge rounded-pill  bg-dark">{{ blog.views }} views</span>
+                            <span class="badge rounded-pill bg-danger text-light">{{ blog.likes.count }} likes</span>
+                            <span class="badge rounded-pill  bg-primary">{{ blog.comments.count }} comments</span>
                         </div>
                             <div class="mt-4">
                                 <a href="{% url 'blog_detail' blog.id %}" class="btn btn-primary btn-sm">Leer mas..</a>
                                 <a href="{% url 'blog_update' blog.id %}" class="btn btn-secondary btn-sm">Editar</a>
                                 <a href="{% url 'blog_create' %}" class="btn btn-success btn-sm">Crear nuevo Blog</a>
-    
-                               {% if user.is_authenticated and user == blog.author %}
+
+                               {% if user.is_authenticated and user == blog.author or user.is_superuser %}
 
     <!-- Botón que abre el modal -->
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ blog.id }}">
@@ -94,13 +94,13 @@
                             <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
                         </li>
                     {% endif %}
-                </ul>   
-            </nav>  
+                </ul>
+            </nav>
         {% endif %}
 
 
     </div>
 
-     
+
 
 {% endblock %}

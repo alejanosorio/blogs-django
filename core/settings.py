@@ -5,7 +5,7 @@ import environ
 from pathlib import Path
 env= environ.Env(DEBUG=(bool, False))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent 
+BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
@@ -15,7 +15,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 DEBUG = env('DEBUG',default=False)
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['alejo2025.pythonanywhere.com'])
+
 
 
 # Application definition
@@ -86,7 +86,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['alejo2025.pythonanywhere.com']
 
 LANGUAGE_CODE = env('LANGUAGE_CODE')
 
@@ -101,7 +101,9 @@ STATIC_URL = '/static/'
 #directorio donde se van a almacenar los archivos estáticos
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 MEDIA_URL ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,('media'))
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -1,11 +1,11 @@
 {%extends 'base.html' %}
 {% block title %}detail{% endblock %}
 {% block content %}
-    <h3 class="text-center">Posts....</h3>
-   
+    <h3 class="text-center text-muted">Posts....</h3>
+
 <div class="container m-4">
 
-       <div class="card" style="width: 80%;height: 80%">
+       <div class="card border border-secondary" style="width: 80%;height: 80%;background:#D3D3D3">
   <img src="{{blogs.image.url}}" class="card-img-top" alt="{{blogs.title}}"/>
   <div class="card-body">
     <p class="card-text">
@@ -14,7 +14,20 @@
         <p class="card-text">Author: {{blogs.author.username}}</p>
         <p class="card-text">Created at: {{blogs.created_at}}</p>
         <p class="card-text">Updated at: {{blogs.updated_at}}</p>
-        <p class="card-text">Category: {{blogs.category.name}}</p>
+           {% if blogs.category %}
+    <p class="card-text">Category: {{ blogs.category.name }}</p>
+{% else %}
+    <p class="card-text">Category: Sin categoría</p>
+{% endif %}
+        {% if blogs.tags.all %}
+            <p class="card-text">Tags:
+                {% for tag in blogs.tags.all %}
+                    <span class="badge bg-secondary">{{ tag.name }}</span>
+                {% endfor %}
+            </p>
+        {% else %}
+            <p class="card-text">Sin etiquetas</p>
+        {% endif %}
         {% if user.is_authenticated %}
         <div class="d-flex align-items-center">
 

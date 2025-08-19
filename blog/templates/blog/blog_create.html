@@ -7,8 +7,7 @@
 
     {% csrf_token %}
     {{ form.as_p }}
-   <label for="id_category">Categoría:</label>
-    {{ form.category }}
+
 
     {% if form.errors %}
         <div class="alert alert-danger">
@@ -24,7 +23,7 @@
     <div class="d-grid">
     <button type="submit" class="btn  btn-success mt-4" >Crear nuevo blog</button>
     </div>
-    
+
 
 </form>
 <a href="{% url 'home' %}" class="btn btn-secondary mt-4">Volver </a>

@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Resultados para "{{ query }}"</h2>
+
+    {% if results %}
+      <ul class="list-group">
+        {% for blog in results %}
+          <li class="list-group-item">
+            <a href="{% url 'blog_detail' blog.id %}">{{ blog.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No se encontraron resultados.</p>
+    {% endif %}
+  </div>
+{% endblock %}

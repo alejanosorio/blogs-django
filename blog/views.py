@@ -77,6 +77,13 @@ class BlogUpdate(UpdateView):
     template_name = 'blog/blog_update.html'
     context_object_name = 'blogs'
     login_url = '/login/'
+     def form_valid(self, form):
+        # Si el usuario marcó "Eliminar imagen"
+        if self.request.POST.get('image-clear'):
+            if form.instance.image:
+                form.instance.image.delete(save=False)  # borra el archivo físico
+                form.instance.image = None  # borra la referencia en la BD
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('blog_detail', kwargs={'pk': self.object.pk})

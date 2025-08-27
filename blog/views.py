@@ -51,7 +51,7 @@ class BlogDetail(DetailView):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = self.object
-            comment.author = request.user.username  # o email, etc.
+            comment.author = request.user.username  
             comment.save()
             return redirect('blog_detail', pk=self.object.pk)
         context = self.get_context_data()
@@ -78,11 +78,11 @@ class BlogUpdate(UpdateView):
     context_object_name = 'blogs'
     login_url = '/login/'
      def form_valid(self, form):
-        # Si el usuario marcó "Eliminar imagen"
+      
         if self.request.POST.get('image-clear'):
             if form.instance.image:
-                form.instance.image.delete(save=False)  # borra el archivo físico
-                form.instance.image = None  # borra la referencia en la BD
+                form.instance.image.delete(save=False)  
+                form.instance.image = None  
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -107,7 +107,7 @@ class ToggleLikeView(LoginRequiredMixin, View):
         return redirect('blog_detail', pk=pk)
 
 def blog_search(request):
-       query = request.GET.get('q', '')  #
+       query = request.GET.get('q', '')  
        results = BlogPost.objects.filter(title__icontains=query) if query else []
        return render(request, 'blog/search.html', {'results': results, 'query': query})
 

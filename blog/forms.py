@@ -10,7 +10,7 @@ class BlogPostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter blog title'}),
             'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write your blog content here'}),
-            'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+            'image': forms.FileInput(attrs={'class': 'form-control-file'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'tags': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Add tags separated by commas'}),
             'is_published': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
@@ -21,7 +21,7 @@ class BlogPostForm(forms.ModelForm):
         self.fields['category'].queryset = Category.objects.all()
         self.fields['title'].label = "Blog Title"
         self.fields['content'].label = "Content"
-        self.fields['image'].label = "Upload Image (optional)"
+        self.fields['image'].label = "Subir o cambiar imagen"
         self.fields['category'].label = "Category"
         self.fields['tags'].label = "Tags (optional)"
         self.fields['is_published'].label = "Publish this blog"
